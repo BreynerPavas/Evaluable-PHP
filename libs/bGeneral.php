@@ -1,5 +1,4 @@
-
-<?php
+﻿<?php
 //Pinta la cabecera HTML
 function cabecera($titulo=NULL) // el archivo actual
 {
@@ -14,7 +13,8 @@ function cabecera($titulo=NULL) // el archivo actual
 				<?php
     echo $titulo;
     ?>
-	</title>
+
+			</title>
 <meta charset="utf-8" />
 </head>
 <body>
@@ -22,17 +22,13 @@ function cabecera($titulo=NULL) // el archivo actual
 }
 
 //Pinta el pie de página HTML
-
 function pie()
 {
     echo "</body>
 	</html>";
 }
 
-//comprobaciones
-
 //Función que sustituye las vocales con tilde por la misma sin tildes
-
 function sinTildes($frase)
 {
     $no_permitidas = array(
@@ -83,18 +79,6 @@ function sinTildes($frase)
     return $texto;
 }
 
-
-function sinEspacios($frase){
-    $texto = trim(preg_replace('/ +/', ' ', $frase));
-    return $texto;
-}
-function sinGuiones($frase){
-    $texto = trim(preg_replace('/-+/', '', $frase));
-    return $texto;
-}
-
-function recoge($var){
-
 //Función que elimina los espacios sobrantes,
 //al inicio de la cadena y más de uno en los caracteres intermedios
 function sinEspacios($frase)
@@ -115,20 +99,6 @@ function recoge($var)
 
     return $tmp;
 }
-
-function recogeCheckbox($var){
-    return (isset($_REQUEST[$var]));
-}
-function cCheckBox(string $text){
-    if($text){
-        return true;
-    }else{
-        return false;
-    }
-}
-    
-function cTexto(string $text, string $campo, array &$errores, int $max = 30, int $min = 1, bool $espacios = TRUE, bool $case = TRUE){
-
 /*
 Función que permite validar cadenas de texto.
 Le pasamos cadena, nombre de campo y array de errores y
@@ -139,7 +109,6 @@ si permitimos o no espacios en nuestra cadena y si la cadena es o no sensible a 
 function cTexto(string $text, string $campo, array &$errores, int $max = 40,
 int $min = 1, bool $espacios = TRUE, bool $case = TRUE)
 {
-
 $case=($case===TRUE)?"i":"";
 $espacios=($espacios===TRUE)?" ":"";
 if ((preg_match("/^[a-zñ$espacios]{" . $min . "," . $max . "}$/u$case", sinTildes($text)))) {
@@ -148,48 +117,6 @@ if ((preg_match("/^[a-zñ$espacios]{" . $min . "," . $max . "}$/u$case", sinTild
 $errores[$campo] = "Error en el campo $campo";
  return false;
 }
-
-function cNumero(string $text, string $campo,array &$errores, int $max=150, int $min=0,bool $espacios=TRUE,bool $guiones=FALSE){
-    $espacios= ($espacios===TRUE)?" ":"";
-    $numAux=intval($text);
-    if ((preg_match("/^[0-9$espacios]+$/",$text)) && $numAux>$min && $numAux<=$max) {
-        return true;
-    }else{
-        $errores[$campo] = "Error en el campo $campo";
-        return false;
-    }
-}
-function cRadio(string $text,string $campo,array &$errores,array $valoresAceptados,bool $requerido=true){
-    //if($requerido){
-        if (in_array($text,$valoresAceptados)){
-            return true;
-        }else{
-            $errores[$campo] = "Error en el campo $campo";
-            return false;
-        }
-    //}
-    //return true;
-}
-function pintaRadio(array $provincias,string $name){
-    echo "<p>";
-        for ($i=0; $i<count($provincias); $i++) {
-            echo '<input type="radio" name="'.$name.'" value="'.$provincias[$i].'">'.$provincias[$i].'<br>';
-        }
-    echo "</p>";
-}
-function cFecha(string $fecha,string $campo, array &$errores){
-    //todas las fechas me llegan -> aaaa/mm/dd
-    $fecha=explode("-",$fecha);
-    if(checkdate($fecha[1],$fecha[2],$fecha[0])){
-        return ($fecha=mktime(0,0,0,$fecha[1],$fecha[2],$fecha[0]));
-    }else{
-        $errores[$campo] = "Error en el campo $campo";
-    }
-}
-function compareFecha($fecha1, $fecha2){
-
-}
-
 
 /*
 Función que valida una cadena que contiene sólo números.
@@ -247,5 +174,4 @@ if ((!isset($_FILES['imagen']))||($_FILES[$nombre]['error'] != 0)) {            
         }
     }
 }
-
 ?>
